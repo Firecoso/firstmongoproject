@@ -26,7 +26,6 @@ public class EmployeeService {
         /*Date data = Date.from(employeeDTO.getStartDate().atStartOfDay(ZoneId.of("Europe/Rome")).toInstant());
         System.out.println(data);*/
         //employee.setStartDate(new Date());
-        employeeRepository.save(employee);
-        return employee;
+        return employeeRepository.insert(employee);
     }
 }
