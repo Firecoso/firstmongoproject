@@ -1,5 +1,6 @@
 package org.app.services;
 
+import org.app.exceptions.EmployeeServiceCannotBeNull;
 import org.app.models.Employee;
 import org.app.models.EmployeeDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,10 @@ public class EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
 
-    public EmployeeDTO save(EmployeeDTO employeeDTO){
+    public Employee save(EmployeeDTO employeeDTO) throws EmployeeServiceCannotBeNull{
+        if(employeeDTO==null){
+            throw new EmployeeServiceCannotBeNull();
+        }
         Employee employee= new Employee();
 
         employee.setCode(employeeDTO.getCode());
@@ -23,6 +27,6 @@ public class EmployeeService {
         System.out.println(data);*/
         //employee.setStartDate(new Date());
         employeeRepository.save(employee);
-        return new EmployeeDTO(employee);
+        return employee;
     }
 }

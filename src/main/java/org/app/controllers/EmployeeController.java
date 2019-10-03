@@ -1,5 +1,6 @@
 package org.app.controllers;
 
+import org.app.exceptions.EmployeeServiceCannotBeNull;
 import org.app.models.Employee;
 import org.app.models.EmployeeDTO;
 import org.app.services.EmployeeRepository;
@@ -44,11 +45,11 @@ public class EmployeeController {
 
     @ResponseBody
     @PostMapping("/insert")
-    public String testInsert(@ModelAttribute EmployeeDTO employeeDTO){
+    public String testInsert(@ModelAttribute EmployeeDTO employeeDTO) throws EmployeeServiceCannotBeNull {
 
 
-        EmployeeDTO res= employeeService.save(employeeDTO);
+        Employee res= employeeService.save(employeeDTO);
 
-        return "Inserted "+ res.getCode() + " "+ res.getFullname();
+        return "Inserted "+ res.getCode() + " "+ res.getFullName();
     }
 }
